@@ -76,6 +76,7 @@ def run_expedition(expedition):
         time.sleep(1)
     if not kc_window_region.exists("fleet_busy.png"):
         kc_window_region.click("ensei_start.png")
+        kc_window_region.hover("senseki.png")
         kc_window_region.wait("exp_started.png", 10)
         expedition.start()
         print expedition, "successfully started"
@@ -88,10 +89,11 @@ def run_expedition(expedition):
 
 def check_expedition():
     time.sleep(1)
+    kc_window_region.hover("senseki.png")
     if check_and_click("ensei_finish.png"):
         wait_and_click("next.png", 20)
         wait_and_click("next.png")
-        kc_window_region.wait("sortie.png", 10)
+        kc_window_region.wait("sortie.png", 20)
 
         check_expedition()
 
