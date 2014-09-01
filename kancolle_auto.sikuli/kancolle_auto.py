@@ -90,7 +90,7 @@ def run_expedition(expedition):
 def check_expedition():
     time.sleep(1)
     kc_window_region.hover("senseki.png")
-    if check_and_click("ensei_finish.png"):
+    if check_and_click("expedition_finish.png"):
         wait_and_click("next.png", 20)
         wait_and_click("next.png")
         kc_window_region.wait("sortie.png", 20)
