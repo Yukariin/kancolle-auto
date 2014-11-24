@@ -5,8 +5,9 @@ import expedition as expedition_module
 
 
 # mapping from expedition id to suitable fleet id for the expedition.
-expedition_id_fleet_map = {3: 2,
-                           5: 3}
+expedition_id_fleet_map = {6:2,
+                           5: 3,
+                           21: 4}
 running_expedition_list = []
 kc_window_region = None
 
@@ -42,10 +43,10 @@ def check_window():
 
     switchApp("KanColleTool Viewer")
     switchApp("KanColleViewer!")
-    if not kc_window_region:
-        kc_window_region = App.focusedWindow()
+    
+    kc_window_region = App.focusedWindow()
 
-    kc_window_region.wait("senseki.png", 30)
+    kc_window_region.wait("senseki.png", 40)
 
 
 def expedition():
@@ -64,6 +65,8 @@ def run_expedition(expedition):
     time.sleep(1)
     if kc_window_region.exists("exp_started.png"):
         print expedition, "is already running. Skipped."
+        expedition.start()
+        running_expedition_list.append(expedition)
         return
     kc_window_region.click("decision.png")
     time.sleep(1)
