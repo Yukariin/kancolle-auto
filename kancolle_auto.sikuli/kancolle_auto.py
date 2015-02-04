@@ -79,6 +79,12 @@ def run_expedition(expedition):
         kc_window_region.click(fleet_name)
         sleep(1)
     if not kc_window_region.exists("fleet_busy.png"):
+        if (kc_window_region.exists("supply_alert.png") or kc_window_region.exists("supply_red_alert.png")):
+            print "Fleet %d not supplied!" % fleet_id
+            supply(fleet_id)
+            expedition()
+            run_expedition(expedition)
+            return
         kc_window_region.click("ensei_start.png")
         kc_window_region.hover("senseki.png")
         kc_window_region.wait("exp_started.png", 10)
