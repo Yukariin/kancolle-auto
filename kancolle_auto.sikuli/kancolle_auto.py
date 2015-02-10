@@ -5,9 +5,9 @@ import expedition as expedition_module
 
 
 # mapping from expedition id to suitable fleet id for the expedition.
-expedition_id_fleet_map = {2:2,
-                           5: 3,
-                           6: 4}
+expedition_id_fleet_map = {2: 2,
+                           4: 3,
+                           10: 4}
 running_expedition_list = []
 kc_window_region = None
 
@@ -50,7 +50,7 @@ def check_window():
     sleep(5)
 
 
-def expedition():
+def go_expedition():
     kc_window_region.hover("senseki.png")
     wait_and_click("sortie.png", 10)
     wait_and_click("expedition.png", 10)
@@ -82,7 +82,7 @@ def run_expedition(expedition):
         if (kc_window_region.exists("supply_alert.png") or kc_window_region.exists("supply_red_alert.png")):
             print "Fleet %d not supplied!" % fleet_id
             supply(fleet_id)
-            expedition()
+            go_expedition()
             run_expedition(expedition)
             return
         kc_window_region.click("ensei_start.png")
@@ -144,7 +144,7 @@ def init():
 
     go_home()
     supply()
-    expedition()
+    go_expedition()
     for exp in expedition_list:
         run_expedition(exp)
 
@@ -158,6 +158,6 @@ while True:
             running_expedition_list.remove(item)
             go_home()
             supply(expedition_id_fleet_map[item.id])
-            expedition()
+            go_expedition()
             run_expedition(item)
     sleep(10)
